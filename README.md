@@ -67,6 +67,9 @@ Everything the [Developer Dashboard](https://chrome.google.com/webstore/devconso
 | Screenshots (1280×800) | `store/screenshot-1.png`, `store/screenshot-2.png` |
 | Small promo tile (440×280) | `store/promo-small.png` |
 | Marquee promo tile (1400×560) | `store/promo-marquee.png` |
+| Homepage URL | https://github.com/thirawat69/frame-capture-for-youtube |
+| Support URL | https://github.com/thirawat69/frame-capture-for-youtube/issues |
+| Official URL | Leave empty — it needs a site verified in Google Search Console |
 
 All store images are 24-bit PNG without alpha, as the store requires.
 
@@ -113,10 +116,15 @@ Note: DRM-protected videos, such as purchased or rented movies, can't be capture
 | Are you using remote code? | **No, I am not using remote code** — all scripts ship inside the package. |
 | Data usage | Leave every data type unchecked — the extension collects nothing. |
 | Certifications | Tick all three. |
+| Privacy policy URL | https://github.com/thirawat69/frame-capture-for-youtube/blob/main/PRIVACY.md |
 
 ### Distribution
 
 - **Public**, **Unlisted** (only people with the link), or **Private** (only listed testers)
+
+## Privacy
+
+The extension collects no data. See [PRIVACY.md](PRIVACY.md).
 
 ## License
 
