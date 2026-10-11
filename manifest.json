@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Frame Capture for YouTube",
+  "version": "1.0.3",
+  "description": "Capture the current YouTube video frame as a clean PNG — no subtitles, no player controls.",
+  "permissions": [
+    "storage",
+    "downloads",
+    "clipboardWrite"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "options.html",
+    "default_title": "Frame Capture for YouTube",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "commands": {
+    "capture-frame": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Capture the current YouTube frame"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

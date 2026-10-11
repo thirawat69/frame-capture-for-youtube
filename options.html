@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body { width: 280px; margin: 0; padding: 14px; font: 13px/1.5 system-ui, sans-serif; }
+      h1 { font-size: 14px; margin: 0 0 10px; }
+      label { display: block; margin: 8px 0; }
+      input[type='number'], input[type='text'] { width: 100%; box-sizing: border-box; padding: 4px; }
+      small { color: #666; }
+      #saved { color: #188038; visibility: hidden; }
+    </style>
+  </head>
+  <body>
+    <h1>Frame Capture for YouTube</h1>
+    <label>
+      Max width (px)
+      <input id="width" type="number" min="0" step="1" />
+      <small>0 = native resolution · never upscales</small>
+    </label>
+    <label><input id="copy" type="checkbox" /> Copy to clipboard</label>
+    <label><input id="download" type="checkbox" /> Save as PNG file</label>
+    <label>
+      Folder in Downloads
+      <input id="folder" type="text" />
+    </label>
+    <small>Shortcut: Alt+Shift+S · change at chrome://extensions/shortcuts</small>
+    <p id="saved">Saved</p>
+    <script src="options.js"></script>
+  </body>
+</html>

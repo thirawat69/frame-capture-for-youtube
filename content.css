@@ -1,0 +1,17 @@
+.yfc-btn.yfc-legacy {
+  padding: 6px !important;
+}
+
+.yfc-toast {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font: 500 14px/1.4 Roboto, Arial, sans-serif;
+  pointer-events: none;
+}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1280px; height: 800px; overflow: hidden;
+    background: radial-gradient(circle at 20% 0%, #2a2a2a, #0f0f0f 60%);
+    color: #fff; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    padding: 64px 64px 72px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  header { display: flex; align-items: center; gap: 20px; }
+  header img { width: 64px; height: 64px; }
+  h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
+  .sub { margin-top: 10px; font-size: 22px; color: #bbb; }
+  .stage { display: flex; align-items: center; gap: 28px; }
+  .col { width: 520px; }
+  .label { font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #999; margin-bottom: 12px; }
+  .label.ok { color: #4ade80; }
+  .frame { position: relative; width: 520px; height: 292px; border-radius: 10px; overflow: hidden; background: #131722; box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+  .frame svg.chart { position: absolute; inset: 0; }
+  .caption { position: absolute; bottom: 58px; left: 50%; transform: translateX(-50%); background: rgba(8,8,8,.75); padding: 4px 10px; font-size: 18px; white-space: nowrap; }
+  .controls { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; padding: 0 12px; display: flex; align-items: center; gap: 14px; background: linear-gradient(transparent, rgba(0,0,0,.8)); }
+  .progress { position: absolute; left: 12px; right: 12px; bottom: 44px; height: 4px; background: rgba(255,255,255,.3); }
+  .progress::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 42%; background: #f00; }
+  .ctl { width: 18px; height: 18px; border-radius: 3px; background: rgba(255,255,255,.85); }
+  .ctl.play { width: 0; height: 0; background: none; border-left: 16px solid #fff; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-radius: 0; }
+  .time { font-size: 13px; color: #eee; }
+  .spacer { flex: 1; }
+  .cam { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,0,0,.25); box-shadow: 0 0 0 2px #f00; }
+  .toast { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.8); padding: 7px 14px; border-radius: 6px; font-size: 15px; font-weight: 500; white-space: nowrap; }
+  .arrow { font-size: 48px; color: #f00; }
+  .features { display: flex; justify-content: space-between; font-size: 20px; color: #ddd; }
+  .features b { color: #fff; }
+  .features span::before { content: "✓ "; color: #4ade80; font-weight: 700; }
+</style>
+</head>
+<body>
+  <header>
+    <img src="../icons/icon128.png" alt="" />
+    <div>
+      <h1>Frame Capture for YouTube</h1>
+      <div class="sub">Grab the exact video frame — clean, sharp, ready to paste into your notes.</div>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="col">
+      <div class="label">What you see</div>
+      <div class="frame">
+        <svg class="chart" viewBox="0 0 520 292"></svg>
+        <div class="caption">so the buyers step in right at this level</div>
+        <div class="progress"></div>
+        <div class="controls">
+          <div class="ctl play"></div><div class="time">12:34 / 29:51</div>
+          <div class="spacer"></div>
+          <div class="cam">
+            <svg viewBox="0 0 36 36" width="30" height="30"><path fill="#fff" d="M14.5 10l-1.8 2.5H10a2 2 0 0 0-2 2V24a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-9.5a2 2 0 0 0-2-2h-2.7L21.5 10h-7zM18 15a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>
+          </div>
+          <div class="ctl"></div><div class="ctl"></div><div class="ctl"></div>
+        </div>
+        <div class="toast">📸 1440×810 · copied</div>
+      </div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="col">
+      <div class="label ok">What you get</div>
+      <div class="frame"><svg class="chart" viewBox="0 0 520 292"></svg></div>
+    </div>
+  </div>
+
+  <div class="features">
+    <span><b>No subtitles</b>, no player controls</span>
+    <span>One click or <b>Alt+Shift+S</b></span>
+    <span>Copy to clipboard or <b>save PNG</b></span>
+  </div>
+
+<script>
+  // Deterministic candlestick chart so both frames show the identical picture
+  let seed = 7;
+  const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const candles = [];
+  let price = 0;
+  for (let i = 0; i < 40; i++) {
+    const open = price, close = open + (rand() - 0.45) * 10;
+    candles.push({ open, close, hi: Math.max(open, close) + rand() * 4, lo: Math.min(open, close) - rand() * 4 });
+    price = close;
+  }
+  // Fit the series into the visible area above the subtitle/controls
+  const max = Math.max(...candles.map((c) => c.hi)), min = Math.min(...candles.map((c) => c.lo));
+  const y = (v) => 30 + ((max - v) / (max - min)) * 170;
+  const parts = [];
+  candles.forEach((c, i) => {
+    const x = 18 + i * 12.4, color = c.close >= c.open ? '#26a69a' : '#ef5350';
+    parts.push(`<line x1="${x + 4.5}" x2="${x + 4.5}" y1="${y(c.hi)}" y2="${y(c.lo)}" stroke="${color}" stroke-width="1.4"/>`);
+    parts.push(`<rect x="${x}" y="${y(Math.max(c.open, c.close))}" width="9" height="${Math.max(1.5, Math.abs(y(c.open) - y(c.close)))}" fill="${color}"/>`);
+  });
+  const grid = [58, 116, 174, 232].map((v) => `<line x1="0" x2="520" y1="${v}" y2="${v}" stroke="#2a2e39"/>`).join('');
+  document.querySelectorAll('svg.chart').forEach((s) => (s.innerHTML = grid + parts.join('')));
+</script>
+</body>
+</html>

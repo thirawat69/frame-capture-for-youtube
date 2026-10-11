@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1280px; height: 800px; overflow: hidden;
+    background: radial-gradient(circle at 20% 0%, #2a2a2a, #0f0f0f 60%);
+    color: #fff; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    padding: 64px; display: flex; gap: 64px; align-items: center;
+  }
+  .text { flex: 1; }
+  header { display: flex; align-items: center; gap: 18px; }
+  header img { width: 56px; height: 56px; }
+  header div { font-size: 22px; font-weight: 600; color: #bbb; }
+  h1 { margin-top: 36px; font-size: 46px; line-height: 1.15; font-weight: 700; letter-spacing: -0.5px; }
+  .list { margin-top: 40px; display: grid; gap: 26px; }
+  .item b { display: block; font-size: 22px; }
+  .item span { display: block; margin-top: 4px; font-size: 18px; color: #aaa; line-height: 1.4; }
+  .item b::before { content: "✓ "; color: #4ade80; }
+
+  /* Browser toolbar + popup, scaled up so the settings are readable */
+  .shot { width: 500px; transform-origin: top center; }
+  .toolbar { height: 52px; border-radius: 12px 12px 0 0; background: #35363a; display: flex; align-items: center; padding: 0 14px; gap: 12px; }
+  .url { flex: 1; height: 32px; border-radius: 16px; background: #202124; color: #9aa0a6; font-size: 14px; display: flex; align-items: center; padding: 0 14px; }
+  .ext { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.12); box-shadow: 0 0 0 2px #f00; }
+  .ext img { width: 20px; height: 20px; }
+  .page { height: 520px; border-radius: 0 0 12px 12px; background: #131722; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+  .popup {
+    position: absolute; top: 10px; right: 14px; width: 280px; transform: scale(1.45); transform-origin: top right;
+    background: #fff; color: #202124; border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.45);
+    padding: 14px; font: 13px/1.5 system-ui, -apple-system, sans-serif;
+  }
+  .popup h2 { font-size: 14px; margin: 0 0 10px; }
+  .popup label { display: block; margin: 8px 0; }
+  .popup .field { width: 100%; border: 1px solid #c4c7c5; border-radius: 3px; padding: 4px; margin-top: 2px; }
+  .popup small { color: #666; }
+  .check { display: inline-block; width: 13px; height: 13px; border-radius: 3px; vertical-align: -2px; margin-right: 4px; border: 1px solid #767676; }
+  .check.on { background: #1a73e8; border-color: #1a73e8; position: relative; }
+  .check.on::after { content: ""; position: absolute; left: 3.5px; top: 0.5px; width: 3px; height: 7px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+</style>
+</head>
+<body>
+  <div class="text">
+    <header><img src="../icons/icon128.png" alt="" /><div>Frame Capture for YouTube</div></header>
+    <h1>Captures that fit<br />your workflow</h1>
+    <div class="list">
+      <div class="item"><b>Consistent width</b><span>Every frame scaled to the same size — or keep native resolution.</span></div>
+      <div class="item"><b>Clipboard, file, or both</b><span>Paste straight into your notes, or save a PNG named after the video and timestamp.</span></div>
+      <div class="item"><b>Your own folder & shortcut</b><span>Pick a Downloads subfolder and remap Alt+Shift+S anytime.</span></div>
+    </div>
+  </div>
+
+  <div class="shot">
+    <div class="toolbar">
+      <div class="url">youtube.com/watch?v=…</div>
+      <div class="ext"><img src="../icons/icon32.png" alt="" /></div>
+    </div>
+    <div class="page">
+      <div class="popup">
+        <h2>Frame Capture for YouTube</h2>
+        <label>Max width (px)<div class="field">1440</div><small>0 = native resolution · never upscales</small></label>
+        <label><span class="check on"></span>Copy to clipboard</label>
+        <label><span class="check on"></span>Save as PNG file</label>
+        <label>Folder in Downloads<div class="field">YouTube Frames</div></label>
+        <small>Shortcut: Alt+Shift+S · change at chrome://extensions/shortcuts</small>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
